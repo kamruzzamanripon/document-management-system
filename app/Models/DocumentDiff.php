@@ -10,8 +10,8 @@ class DocumentDiff extends Model
     use HasFactory;
 
     protected $fillable = [
-        'document_id ',
-        'document_version_id ',
+        'document_id',
+        'document_version_id',
         'diff_body_content',
         'diff_tags_content',
     ];

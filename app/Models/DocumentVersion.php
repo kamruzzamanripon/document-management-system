@@ -10,8 +10,8 @@ class DocumentVersion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'document_id ',
-        'version ',
+        'document_id',
+        'version',
         'body_content',
         'tags_content',
     ];
