@@ -48,3 +48,65 @@ per the client's request.
          3. Do not create diff for inactive users and documents.
          4. Do not create diff for documents which latest diff already exists.
          5. Do not create document diff for those clients who already viewed the latest diff.
+
+## Install App:
+    - composer install / update
+    - rename .env.example like .env
+    - put necessary information into .env file
+    - php artisan serve
+
+## API URL:
+    1. Register
+    http://127.0.0.1:8000/api/register
+    method:POST
+    payload Example
+        {
+        "name" : "ripon",
+        "email" : "ripon1@gmail.com",
+        "password" : "Rip123456@",
+        "password_confirmation": "Rip123456@"
+        }
+
+    2. Login
+    http://127.0.0.1:8000/api/login
+    method:POST
+    payload Example
+        {
+        "email" : "ripon1@gmail.com",
+        "password" : "Rip123456@"
+        }
+
+    3. Store / Create Document
+    http://127.0.0.1:8000/api/document
+    method:POST
+    payload Example
+        {
+        "title" : "title Sample Data",
+        "body_content" : "body_content Sample Data"
+        "tags_content" : "tags_content Sample Data"
+        } 
+
+    4. Edit / Update Document
+    http://127.0.0.1:8000/api/document/1
+    method:POST
+    payload Example
+        {
+        "title" : "title Sample Data",
+        "body_content" : "body_content Sample Data"
+        "tags_content" : "tags_content Sample Data"
+        } 
+
+    5. All Document
+    http://127.0.0.1:8000/api/document
+    method:GET
+
+    6. Single Document
+    http://127.0.0.1:8000/api/document/1
+    method:GET
+
+
+## Schedule Task Run:
+    php artisan create:document-diffs
+    
+
+       

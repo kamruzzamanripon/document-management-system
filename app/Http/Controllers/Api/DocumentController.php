@@ -8,8 +8,7 @@ use App\Models\Document;
 use App\Services\DocumentService;
 use Illuminate\Http\Request;
 
-class DocumentController extends Controller
-{
+class DocumentController extends Controller {
     /**
      * @var ClientService
      */
@@ -19,30 +18,38 @@ class DocumentController extends Controller
      * DocumentController constructor.
      * @param DocumentService $documentService
      */
-    public function __construct(DocumentService $documentService)
-    {
+    public function __construct( DocumentService $documentService ) {
         $this->documentService = $documentService;
-        
+
     }
 
+    /**
+     * Display a list of all active documents.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index() {
+        $data = $this->documentService->allActiveDocument();
 
-    public function index(){
-       $data =  $this->documentService->allActiveDocument();
-
-       $transformedData = DocumentResource::collection($data)
+        $transformedData = DocumentResource::collection( $data )
             ->response()
             ->getData();
 
-       return $this->successResponse(
-        $transformedData,
-        "All Active Document",
-        200
+        return $this->successResponse(
+            $transformedData,
+            "All Active Document",
+            200
         );
     }
 
-    public function store(Request $request)
-    {
-        $this->documentService->store($request);
+    /**
+     * Store a newly created document.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store( Request $request ) {
+        $this->documentService->store( $request );
 
         return $this->successResponse(
             null,
@@ -51,10 +58,15 @@ class DocumentController extends Controller
         );
     }
 
-    public function update(Request $request, Document $document)
-    {
-        //dd($request->all());
-        $this->documentService->edit($request, $document);
+    /**
+     * Update an existing document.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Document  $document
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update( Request $request, Document $document ) {
+        $this->documentService->edit( $request, $document );
 
         return $this->successResponse(
             null,
@@ -63,15 +75,20 @@ class DocumentController extends Controller
         );
     }
 
-    public function singleDocument(Document $document)
-    {
-        $transformedData = new DocumentResource($document);
+    /**
+     * Retrieve a single document by its ID.
+     *
+     * @param  \App\Models\Document  $document
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function singleDocument( Document $document ) {
+        $transformedData = new DocumentResource( $document );
 
         return $this->successResponse(
             $transformedData,
             "Single Document",
             200
-            );
-        
+        );
+
     }
 }
