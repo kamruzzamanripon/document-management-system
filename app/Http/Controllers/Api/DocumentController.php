@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DocumentResource;
 use App\Models\Document;
 use App\Services\DocumentService;
 use Illuminate\Http\Request;
@@ -21,6 +22,22 @@ class DocumentController extends Controller
     public function __construct(DocumentService $documentService)
     {
         $this->documentService = $documentService;
+        
+    }
+
+
+    public function index(){
+       $data =  $this->documentService->allActiveDocument();
+
+       $transformedData = DocumentResource::collection($data)
+            ->response()
+            ->getData();
+
+       return $this->successResponse(
+        $transformedData,
+        "All Active Document",
+        200
+        );
     }
 
     public function store(Request $request)
@@ -30,7 +47,7 @@ class DocumentController extends Controller
         return $this->successResponse(
             null,
             "document Create Successfully",
-            202
+            201
         );
     }
 
@@ -44,5 +61,17 @@ class DocumentController extends Controller
             "document Update Successfully",
             202
         );
+    }
+
+    public function singleDocument(Document $document)
+    {
+        $transformedData = new DocumentResource($document);
+
+        return $this->successResponse(
+            $transformedData,
+            "Single Document",
+            200
+            );
+        
     }
 }

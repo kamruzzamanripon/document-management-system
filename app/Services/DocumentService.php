@@ -28,6 +28,16 @@ class DocumentService extends BaseService
         $this->documentVersion = $documentVersion;
     }
 
+    public function allActiveDocument()
+    {
+       return Document::where('status', 0)->with('versions')->orderBy('created_at', 'desc')->paginate(10);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function store($request)
     {
         //1st document Create
@@ -46,6 +56,7 @@ class DocumentService extends BaseService
 
         return  $document;
     } 
+    
     
     public function edit($request, $document)
     {

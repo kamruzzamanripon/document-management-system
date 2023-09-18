@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\DocumentController;
+use App\Http\Controllers\Api\DocumentVersionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,18 +20,24 @@ require __DIR__ . '/auth.php';
 
 
 
+//Route::get('/document', [DocumentController::class, 'index']);
+
+Route::group(['prefix' => 'document'], function () {
+    Route::get('/', [DocumentController::class, 'index']);
+    Route::get('/{document}', [DocumentController::class, 'singleDocument']);
+});
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
    
     Route::group(['prefix' => 'document'], function () {
-        Route::get('/', [DocumentController::class, 'index']);
         Route::post('/', [DocumentController::class, 'store']);
         Route::post('/{document}', [DocumentController::class, 'update']);
     });
 
 
     Route::group(['prefix' => 'document-version'], function () {
-        Route::get('/', [UserIndustriesController::class, 'index']);
-        Route::post('/', [UserIndustriesController::class, 'store']);
-        Route::patch('/', [UserIndustriesController::class, 'update']);
+        Route::get('/', [DocumentVersionController::class, 'index']);
+        Route::post('/', [DocumentVersionController::class, 'store']);
+        Route::patch('/', [DocumentVersionController::class, 'update']);
     });
 });

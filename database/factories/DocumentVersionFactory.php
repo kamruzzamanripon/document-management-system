@@ -29,7 +29,7 @@ class DocumentVersionFactory extends Factory
             'document_id' =>  Document::factory(),
             'version' => $this->faker->randomElement(['ver_0001', 'ver_0002', 'ver_0003', 'ver_0004', 'ver_0005']),
             'body_content' => $this->faker->paragraphs(3, true),
-            'tags_content' => '<ul><li>' . $this->faker->sentence . '</li></ul>',
+            'tags_content' =>  $this->faker->sentence ,
         ];
     }
 }
