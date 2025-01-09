@@ -1,4 +1,4 @@
-## About This Project
+## 📝 About This Project
 
 Suppose we have a document management system. Our application has two types of users:
 authors and clients. Authors create documents and frequently update those documents.
@@ -13,12 +13,12 @@ per the client's request.
 
 
 
-## Database Tables (column):
+## 📋 Database Tables (column):
 - Users: id, username, email, status (active or inactive) (only clients).
 - Documents: id, title, current_version, status (active or inactive)
 - Document Versions: id, document_id, version, body_content, tags_content
 
-#### Sample Data (column)
+#### 📱 Sample Data (column)
     - body_content: {“introduction”: “<ul><li>Federal Government's superannuation
         reforms in the 2020.\t</li></ul>”, “facts”: “<ul><li>Federal Government's
         superannuation reforms in the 2020.\t</li></ul>”, “summary”: “<ul><li>Federal
@@ -27,7 +27,7 @@ per the client's request.
         2020.\t</li></ul>   
 - Document Users: id, document_id, user_id, last_viewed_version
 
-## TASK:
+## 🧾 TASK:
     - Create database with above tables and populate fake data
         - 300 active/inactive users, 1200 active/inactive documents, 2500 document version
           (using 500 documents), 8400 document users
@@ -40,13 +40,13 @@ per the client's request.
          4. Do not create diff for documents which latest diff already exists.
          5. Do not create document diff for those clients who already viewed the latest diff.
 
-## Install App:
+## 🚩 Install App:
     - composer install / update
     - rename .env.example like .env
     - put necessary information into .env file
     - php artisan serve
 
-## API URL:
+## 💼 API URL:
     1. Register
     http://127.0.0.1:8000/api/register
     method:POST
@@ -96,7 +96,7 @@ per the client's request.
     method:GET
 
 
-## Schedule Task Run:
+## ⚒️ Schedule Task Run:
     php artisan create:document-diffs
     
 
